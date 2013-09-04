@@ -26,8 +26,15 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <input type="password" ng-model="cryptokey" placeholder="Key..." required>
-    <div class="container" ng-view=""></div>
+    <input ng-hide="showkey" type="password" ng-model="cryptokey" placeholder="Key..." required>
+    <input ng-show="showkey" type="text" ng-model="cryptokey" placeholder="Key..." required>
+    <input type="checkbox" ng-model="showkey">
+    <div class="container" ng-view="" ng-show="cryptokey"></div>
+    <div id="name" class="container" ng-hide="cryptokey">
+      <div class="hero-unit">
+        Please provide a key at the upper left
+      </div>
+    </div>
 
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>

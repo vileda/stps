@@ -22,7 +22,7 @@
       <label>Passphrase</label>
       <input type="text" class="input" ng-model="credential.passphrase" placeholder="Passphrase" required>
     </div>
-  <input ng-disabled="form.$invalid" class="btn-primary" type="submit" ng-click="save()" value="Save">
-  <input class="btn-secondary" type="submit" ng-click="cancle()" value="Cancle">
+  <input ng-disabled="form.$invalid || !decrypted || !cryptokey" class="btn-primary" type="submit" ng-click="save()" value="Save">
+  <button class="btn-secondary" ng-click="cancel()">Cancel</button>
   </form>
 </div>

@@ -10,6 +10,6 @@ angular.module('stpsApp').
         $timeout(function() { $location.path('/'); });
       });
     };
-    $scope.cancle = function() { $location.path('/'); };
+    $scope.cancel = function() { $location.path('/'); };
     $scope.decrypted = true;
   });

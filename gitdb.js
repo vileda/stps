@@ -30,7 +30,7 @@ app.configure(function() {
   app.use(express.bodyParser()); // used to parse JSON object given in the request body
 });
 
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/dist'));
 
 app.get('/api/credentials/:id', function (request, response) {
   if(request.params.id === 'all') {
