@@ -1,0 +1,12 @@
+<div class="hero-unit">
+  <h1>Search</h1>
+  <p>Type a search term</p>
+  <input type="text" class="search-query" ng-model="search" placeholder="search...">
+  <i class="icon-search"></i>
+  <a href="#/add">Add</a>
+  <ul ng-show="search && cryptokey">
+    <li ng-repeat="credential in credentials | filter:search | orderBy:'title'">
+      <a href="#/show/{{credential.id}}">{{credential.title}}</a>
+    </li>
+  </ul>
+</div>

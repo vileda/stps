@@ -1,0 +1,28 @@
+<div class="hero-unit">
+  <h1 ng-show="credential.id">Edit</h1>
+  <h1 ng-hide="credential.id">Add</h1>
+  <p ng-show="credential.id">Edit Credential</p>
+  <p ng-hide="credential.id">Create new Credential</p>
+  <p ng-hide="decrypted">Wrong passphrase!</p>
+  <form name="form">
+    <input type="hidden" value="{{credential.id}}" ng-model="credential.id">
+    <div class="control-group">
+      <label>Title</label>
+      <input type="text" class="input" ng-model="credential.title" placeholder="Title" required>
+    </div>
+    <div class="control-group">
+      <label>Location</label>
+      <input type="text" class="input" ng-model="credential.location" placeholder="Location" required>
+    </div>
+    <div class="control-group">
+      <label>Login</label>
+      <input type="text" class="input" ng-model="credential.login" placeholder="Login" required>
+    </div>
+    <div class="control-group">
+      <label>Passphrase</label>
+      <input type="text" class="input" ng-model="credential.passphrase" placeholder="Passphrase" required>
+    </div>
+  <input ng-disabled="form.$invalid" class="btn-primary" type="submit" ng-click="save()" value="Save">
+  <input class="btn-secondary" type="submit" ng-click="cancle()" value="Cancle">
+  </form>
+</div>
