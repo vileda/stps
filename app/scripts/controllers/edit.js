@@ -21,11 +21,13 @@ angular.module('stpsApp').
   controller('EditCtrl', function ($scope, $location, $routeParams, $timeout, Credential) {
     fetchAndDrecrypt($scope, $routeParams, Credential);
     $scope.save = function() {
-      Credential.save($scope.credential, function() {
+      var credential = angular.copy($scope.credential);
+      credential.login = sjcl.encrypt($scope.cryptokey, credential.login);
+      credential.passphrase = sjcl.encrypt($scope.cryptokey, credential.passphrase);
+      Credential.save(credential, function() {
         $timeout(function() { $location.path('/'); });
       });
     };
-
     $scope.cancel = function() { $location.path('/'); };
     $scope.$watch('cryptokey', function() { fetchAndDrecrypt($scope, $routeParams, Credential); });
   });

@@ -12,4 +12,8 @@ angular.module('stpsApp').
     };
     $scope.cancel = function() { $location.path('/'); };
     $scope.decrypted = true;
+    $scope.checkKey = function() {
+      if($scope.credential.id) { return false; }
+      return $scope.cryptokey !== $scope.cryptokeyRepeat;
+    };
   });
