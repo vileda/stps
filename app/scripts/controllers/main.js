@@ -1,5 +1,18 @@
 'use strict';
 
+var invokeUploadFile = function(that) {
+  angular.element(that).scope()['MainCtrl'].readFile(that.files[0]);
+  angular.element(that).scope().$digest();
+};
+
+function readFile(file, cb) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    cb(e.target.result);
+  };
+  reader.readAsBinaryString(file);
+}
+
 angular.module('stpsApp').
   controller('MainCtrl', function ($scope, Credential) {
     $scope.credentials = Credential.query();
@@ -7,15 +20,15 @@ angular.module('stpsApp').
     $scope.$watch('keyfile', function() {
       if($scope.keyfile) {
         var f = $scope.keyfile[0];
-        var reader = new FileReader();
-        reader.onload = (function(f, $scope) {
-          return function(e) {
-            $scope.keyfileData = e.target.result;
-            $scope.cryptokey = btoa($scope.keyfileData).trim();
-          };
-        })(f, $scope);
-        reader.readAsBinaryString(f);
+        readFile(f, function(data) {
+          $('input#cryptokey').val(btoa(data).trim());
+          $scope.cryptokey = btoa(data).trim();
+          angular.element($('input#cryptokey')[0]).triggerHandler('change');
+        });
       }
-      else { $scope.cryptokey = false; }
+      else { $scope.cryptokey = ''; }
     });
+    $scope.readFile = function(file) {
+      console.log(file);
+    };
   });

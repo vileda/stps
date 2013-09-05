@@ -1,10 +1,11 @@
 'use strict';
 
 function fetchAndDrecrypt($scope, $routeParams, Credential) {
+  var $cryptokey = $('input#cryptokey');
   var credential = Credential.get({credentialId: $routeParams.credentialId}, function() {
     try {
-      credential.login = sjcl.decrypt($scope.cryptokey, credential.login);
-      credential.passphrase = sjcl.decrypt($scope.cryptokey, credential.passphrase);
+      credential.login = sjcl.decrypt($cryptokey.val(), credential.login);
+      credential.passphrase = sjcl.decrypt($cryptokey.val(), credential.passphrase);
       $scope.credential = credential;
       $scope.decrypted = true;
     }
@@ -22,8 +23,9 @@ angular.module('stpsApp').
     fetchAndDrecrypt($scope, $routeParams, Credential);
     $scope.save = function() {
       var credential = angular.copy($scope.credential);
-      credential.login = sjcl.encrypt($scope.cryptokey, credential.login);
-      credential.passphrase = sjcl.encrypt($scope.cryptokey, credential.passphrase);
+      var $cryptokey = $('input#cryptokey');
+      credential.login = sjcl.encrypt($cryptokey.val(), credential.login);
+      credential.passphrase = sjcl.encrypt($cryptokey.val(), credential.passphrase);
       Credential.save(credential, function() {
         $timeout(function() { $location.path('/'); });
       });

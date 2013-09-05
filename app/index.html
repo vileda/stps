@@ -26,20 +26,18 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-show="mode == 'passphrase'" id="passphrase-mode">
-      <input ng-hide="showkey" type="password" ng-model="cryptokey" placeholder="Key..." required>
-      <input ng-show="showkey" type="text" ng-model="cryptokey" placeholder="Key..." required>
-      <input type="checkbox" ng-model="showkey">
+    <div>
+      <div>
+        <input ng-hide="showkey" type="password" id="cryptokey" ng-model="cryptokey" placeholder="Key..." required>
+        <input ng-show="showkey" type="text" id="cryptokey" ng-model="cryptokey" placeholder="Key..." required>
+        <input type="checkbox" ng-model="showkey">
+      </div>
+      <div>
+        <input type="file" id="keyfile" files-model="keyfile">
+      </div>
     </div>
-    <div ng-show="mode == 'file'" id="file-mode">
-      <input type="file" id="keyfile" files-model="keyfile">
-    </div>
-    <div id="mode-control">
-      File <input ng-init="mode = 'file'" ng-model="mode" type="radio" name="mode" value="file" checked>
-      Passphrase <input ng-model="mode" type="radio" name="mode" value="passphrase">
-    </div>
-    <div class="container" ng-view="" ng-show="cryptokey"></div>
-    <div id="name" class="container" ng-hide="cryptokey">
+    <div class="container" ng-view="" ng-show="cryptokey || keyfile"></div>
+    <div id="name" class="container" ng-hide="cryptokey || keyfile">
       <div class="hero-unit">
         Please provide a key at the upper left
       </div>
