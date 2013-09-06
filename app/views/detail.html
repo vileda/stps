@@ -20,7 +20,10 @@
     </div>
     <div class="control-group">
       <label>Passphrase</label>
-      <input type="text" class="input" ng-model="credential.passphrase" placeholder="Passphrase" required>
+      <button data-clipboard-target="passphrase" ng-show="credential.id" id="clip_copy" class="btn-secondary"><i class="icon-file"></i></button>
+      <input type="password" class="input" ng-hide="showpassphrase" ng-model="credential.passphrase" placeholder="Passphrase" required>
+      <input type="text" class="input" ng-show="showpassphrase" id="passphrase" ng-model="credential.passphrase" placeholder="Passphrase" required>
+      <input type="checkbox" ng-model="showpassphrase">
     </div>
     <div ng-hide="credential.id || keyfile" class="control-group">
       <label>Cryptokey repeat</label>
