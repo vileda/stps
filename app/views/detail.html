@@ -12,15 +12,18 @@
     </div>
     <div class="control-group">
       <label>Location</label>
+      <a ng-show="credential.id" class="btn-secondary" href="{{credential.location}}" target="_blank"><i class="icon-globe"></i></a>
       <input type="text" class="input" ng-model="credential.location" placeholder="Location" required>
+      <a ng-show="credential.id" class="btn-secondary" href="{{basicAuthLocation}}" target="_blank"><i class="icon-lock"></i></a>
     </div>
     <div class="control-group">
       <label>Login</label>
-      <input type="text" class="input" ng-model="credential.login" placeholder="Login" required>
+      <button data-clipboard-target="login" ng-show="credential.id" id="clip_copy_login" class="btn-secondary"><i class="icon-file"></i></button>
+      <input type="text" class="input" ng-model="credential.login" id="login" placeholder="Login" required>
     </div>
     <div class="control-group">
       <label>Passphrase</label>
-      <button data-clipboard-target="passphrase" ng-show="credential.id" id="clip_copy" class="btn-secondary"><i class="icon-file"></i></button>
+      <button data-clipboard-target="passphrase" ng-show="credential.id" id="clip_copy_passphrase" class="btn-secondary"><i class="icon-file"></i></button>
       <input type="password" class="input" ng-hide="showpassphrase" ng-model="credential.passphrase" placeholder="Passphrase" required>
       <input type="text" class="input" ng-show="showpassphrase" id="passphrase" ng-model="credential.passphrase" placeholder="Passphrase" required>
       <input type="checkbox" ng-model="showpassphrase">

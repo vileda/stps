@@ -14,7 +14,7 @@ function fetchAndDrecrypt($scope, $routeParams, Credential) {
       credential.passphrase = sjcl.decrypt($cryptokey.val(), credential.passphrase);
       $scope.credential = credential;
       $scope.decrypted = true;
-
+      $scope.basicAuthLocation = $scope.credential.location.replace(/(https?:\/\/)(.*)/,'$1'+$scope.credential.login + ':' + $scope.credential.passphrase + '@$2');
     }
     catch(e) {
       $scope.decrypted = false;
@@ -39,5 +39,6 @@ angular.module('stpsApp').
     };
     $scope.cancel = function() { $location.path('/'); };
     $scope.$watch('cryptokey', function() { fetchAndDrecrypt($scope, $routeParams, Credential); });
-    $scope.clip = new ZeroClipboard($('#clip_copy')[0]);
+    $scope.clip_login = new ZeroClipboard($('#clip_copy_login'));
+    $scope.clip_passphrase = new ZeroClipboard($('#clip_copy_passphrase'));
   });
